@@ -1,0 +1,142 @@
+body {
+    direction: rtl;
+}
+
+hr {
+    background-color: #eee;
+    border: 0 none;
+    color: #eee;
+    height: 4px;
+
+}
+
+ul {
+    list-style: none;
+}
+
+.addnewbtn {
+    color: #1BC5BD;
+    width: 20%;
+    border: 1px solid #1BC5BD;
+}
+
+.addnewbtn1 {
+    background: #1BC5BD;
+    color: white;
+    width: 10%;
+    border: 1px solid #1BC5BD;
+
+}
+
+.addnewbtn1:hover {
+    background: #1BC5BD;
+    color: white;
+
+    border: 1px solid #1BC5BD;
+}
+
+.addnewbtn:hover {
+    color: #1BC5BD;
+
+    border: 1px solid #1BC5BD;
+}
+
+.nullfield {
+    background: #f1f1f1;
+    margin-top: 39px !important;
+}
+
+.nullfield:hover {
+
+    cursor: pointer;
+    background: white;
+    border-color: #1BC5BD;
+}
+
+.nullfield:hover .addplus {
+
+    color: #1BC5BD;
+!important;
+
+}
+
+.componentitem {
+    background: #f3f6f9;
+    border-radius: 5px;
+}
+
+.deleteicon:hover {
+    cursor: pointer;
+}
+
+.settingicon:hover {
+    cursor: pointer;
+}
+
+.componentitem:hover {
+    cursor: pointer;
+    color: #1BC5BD;
+    border: 1px solid #1BC5BD;
+    background: white;
+}
+
+.componentholder:hover .settingmenu {
+    display: flex !important;
+    justify-content: end !important;
+}
+
+.componentholder:hover .componentfield {
+    border: 1px solid black !important;
+    border-radius: 6px;
+    padding: 10px 10px;
+}
+
+.componentfield {
+    border: 1px solid white;
+    border-radius: 6px;
+    padding: 10px 10px;
+}
+
+.removemark {
+    position: absolute;
+    top: 30%;
+    right: 95%;
+    color: red;
+}
+
+.removemark:hover {
+    cursor: pointer;
+}
+
+.removemark1 {
+    position: absolute;
+    top: 40%;
+    right: 87%;
+    color: red;
+}
+
+.removemark1:hover {
+    cursor: pointer;
+}
+
+.removemark2 {
+    position: absolute;
+    top: 40%;
+    right: 94%;
+    color: red;
+}
+
+.removemark2:hover {
+    cursor: pointer;
+}
+
+.removemark3 {
+    position: absolute;
+    top: 40%;
+    right: 44%;
+    color: red;
+}
+
+.removemark3:hover {
+    cursor: pointer;
+}

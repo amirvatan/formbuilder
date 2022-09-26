@@ -1,0 +1,1213 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.rtl.min.css">
+    <link rel="stylesheet" href="fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="clock%20and%20date%20picker/clockpicker.min.css">
+    <link rel="stylesheet" href="clock%20and%20date%20picker/mds.bs.datetimepicker.style.css">
+    <link rel="stylesheet" href="style.css">
+    <title>Document</title>
+</head>
+<body id="app">
+<div class="row justify-content-center mt-5">
+    <div class="row col-8  shadow-sm">
+        <div class="col-12">
+            <h4 class="m-3 ms-3">ایحاد فرم جدید</h4>
+            <hr>
+            <div class="mx-5">
+                <input type="text" class="form-control my-4 py-2" placeholder="عنوان فرم"></input>
+            </div>
+
+        </div>
+
+
+        <div class="row justify-content-center">
+            <div class="col-11 row" id="formholder">
+                <div v-for="(component,index) in components" :class="'col-12'+ ' ' +  'col-md-'+component.col"
+                     data-bs-toggle="modal" data-bs-target="#addcomponentmodal" @click="getindex(index)"
+                     :id="'component' + index">
+                    <div class="d-flex justify-content-center nullfield form-control my-5">
+                        <h3 class="addplus">+</h3>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+
+        <button class="addnewbtn btn m-auto mb-5 mt-5" data-bs-toggle="modal" data-bs-target="#addnewfieldmodal">افزودن
+            مورد
+            جدید
+        </button>
+
+
+    </div>
+</div>
+
+<!--<div class="row">
+    <input type="text" class="form-control mt-4" data-name="date" name="date" id="date" required>
+    <input type="text" class="clockpicker form-control mt-4" name="start_time"
+           id="start_time" required>
+</div>-->
+
+<div class="modal fade" id="addnewfieldmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-body d-flex justify-content-center ">
+                <button class="btn addnewbtn ms-3" @click="addnewcomponent(1)" data-bs-dismiss="modal">یک فیلد</button>
+                <button class="btn addnewbtn ms-3" @click="addnewcomponent(2)" data-bs-dismiss="modal">دو فیلد</button>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="addcomponentmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-body row g-4">
+                <div v-for="item in itemcomponents" class="col-6" @click="createcomponent(item)"
+                     data-bs-dismiss="modal">
+                    <div class="d-flex componentitem p-3">
+                        <h6 v-html="item.icon"></h6>
+                        <h4 class="m-auto">[[item.name]]</h4>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="editinputmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>تنظبمات</h4>
+                <hr>
+            </div>
+            <div class="modal-body p-5 ">
+                <input type="text" class="form-control my-4 py-2" v-model="editcomponent.title">
+                <input type="text" class="form-control my-4 py-2" v-model="editcomponent.placeholder"
+                       v-if="editcomponent.name === 'input' || editcomponent.name === 'textarea'">
+                <input type="text" class="form-control my-4 py-2" v-model="editcomponent.label">
+                <div v-if="editcomponent.name === 'input'">
+                    <hr>
+                    <label class="mb-2">نوع ورودی</label>
+                    <select class="form-select" aria-label="Default select example" v-model="editcomponent.type">
+                        <option selected></option>
+                        <option value="text">متن</option>
+                        <option value="phone">شماره تلفن</option>
+                        <option value="number">عدد</option>
+                        <option value="email">ایمیل</option>
+                    </select>
+                </div>
+
+
+                <div class="d-flex" v-if="editcomponent.name === 'date'">
+                    <hr>
+                    <input type="checkbox" v-model="editcomponent.beforetoday">
+                    <h5 class="m-auto ms-1">امکان انتخاب تاریخ قبل از امروز</h5>
+                </div>
+                <hr>
+                <div class="d-flex">
+                    <input type="checkbox" v-model="editcomponent.required">
+                    <h5 class="m-auto ms-1">اجباری بودن فیلد</h5>
+                </div>
+                <hr>
+                <button class="btn addnewbtn1 " @click="componentsetting" data-bs-dismiss="modal">تایید</button>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="edittitlemodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>تنظبمات</h4>
+                <hr>
+            </div>
+            <div class="modal-body p-5 ">
+                <input type="text" class="form-control my-4 py-2" v-model="editcomponent.title">
+                <hr>
+
+
+                <button class="btn addnewbtn1" @click="componentsetting" data-bs-dismiss="modal">تایید</button>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="uploadfilemodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>تنظبمات</h4>
+                <hr>
+            </div>
+            <div class="modal-body p-5 ">
+                <input type="text" class="form-control my-4 py-2" v-model="editcomponent.title">
+                <input type="text" class="form-control my-4 py-2" v-model="editcomponent.label">
+                <hr>
+                <div>
+                    <h5 class="mb-3">فرمت های مجاز</h5>
+                    <div class="d-flex">
+                        <ul class="ms-3">
+                            <li><input type="checkbox" class="filetype" value="همه"> همه</li>
+                            <li><input type="checkbox" class="filetype" value=".pdf"> pdf</li>
+                            <li><input type="checkbox" class="filetype" value=".doc"> doc</li>
+                            <li><input type="checkbox" class="filetype" value=".docx"> docx</li>
+                            <li><input type="checkbox" class="filetype" value=".xls"> xls</li>
+                        </ul>
+                        <ul class="ms-3">
+                            <li><input type="checkbox" class="filetype" value=".xlsx"> xlsx</li>
+                            <li><input type="checkbox" class="filetype" value=".csv"> csv</li>
+                            <li><input type="checkbox" class="filetype" value=".txt"> txt</li>
+                            <li><input type="checkbox" class="filetype" value=".rtf"> rtf</li>
+                            <li><input type="checkbox" class="filetype" value=".html"> html</li>
+                        </ul>
+                        <ul class="ms-3">
+                            <li><input type="checkbox" class="filetype" value=".zip"> zip</li>
+                            <li><input type="checkbox" class="filetype" value=".mp3"> mp3</li>
+                            <li><input type="checkbox" class="filetype" value=".wma"> wma</li>
+                            <li><input type="checkbox" class="filetype" value=".mpg"> mpg</li>
+                            <li><input type="checkbox" class="filetype" value=".flv"> flv</li>
+                        </ul>
+                        <ul class="ms-3">
+                            <li><input type="checkbox" class="filetype" value=".avi"> avi</li>
+                            <li><input type="checkbox" class="filetype" value=".jpg"> jpg</li>
+                            <li><input type="checkbox" class="filetype" value=".jpeg"> jpeg</li>
+                            <li><input type="checkbox" class="filetype" value=".png"> png</li>
+                            <li><input type="checkbox" class="filetype" value=".gif"> gif</li>
+                        </ul>
+                    </div>
+
+                </div>
+                <hr>
+                <div>
+                    <h5>محدوده سایز محاز</h5>
+                    <div class="d-flex">
+
+                        <div class="d-flex ms-3 mb-3 w-50">
+                            <label class="m-auto mx-2">کمترین</label>
+
+                            <input type="text" class="form-control py-2" v-model="editcomponent.min_size">
+
+                        </div>
+                        <div class="d-flex ms-3 mb-3 w-50">
+                            <label class="m-auto mx-2">بیشترین</label>
+
+                            <input type="text" class="form-control py-2" placeholder="KB"
+                                   v-model="editcomponent.max_size">
+
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="d-flex">
+                    <input type="checkbox" v-model="editcomponent.required">
+                    <h5 class="m-auto ms-1">اجباری بودن فیلد</h5>
+                </div>
+                <hr>
+
+
+                <button class="btn addnewbtn1" @click="componentsetting" data-bs-dismiss="modal">تایید</button>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="selectmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>تنظبمات</h4>
+                <hr>
+            </div>
+            <div class="modal-body p-5 " @change="getoptions">
+                <input type="text" class="form-control my-4 py-2" v-model="editcomponent.title">
+                <div class="mb-3 position-relative" v-for="(option,index) in editcomponent.options">
+
+                    <input type="text" class="form-control my-4 py-2" :id="'optionvalue' + index"
+                           :placeholder="'انتخاب' +' ' +(index + 1)" v-model="option">
+                    <i class="fa-solid fa-xmark removemark" @click="removeoption(index)"></i>
+
+                </div>
+
+                <button class="btn addnewbtn1" @click="addoption">+</button>
+                <input type="text" class="form-control my-4 py-2" v-model="editcomponent.label">
+                <hr>
+                <h5>انتخاب گزینه پیش فرض</h5>
+                <select class="form-select" v-model="editcomponent.default_option">
+                    <option v-for="option in editcomponent.options" :value="option">[[option]]</option>
+
+                </select>
+
+                <hr>
+                <div class="d-flex">
+                    <input type="checkbox" v-model="editcomponent.required">
+                    <h5 class="m-auto ms-1">اجباری بودن فیلد</h5>
+                </div>
+                <hr>
+
+
+                <button class="btn addnewbtn1" @click="componentsetting" data-bs-dismiss="modal">تایید</button>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="checkmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>تنظبمات</h4>
+                <hr>
+            </div>
+            <div class="modal-body p-5">
+                <input type="text" class="form-control my-4 py-2" v-model="editcomponent.title">
+                <div class="row">
+                    <div :class="'mb-1' +' '+ 'position-relative'+' '+ 'col-' + twocol"
+                         v-for="(option,index) in editcomponent.options">
+
+                        <input type="text" class="form-control my-2 py-2"
+                               :id="'optionvalue' + index" :placeholder="'انتخاب' +' ' +(index + 1)"
+                               v-model="option.title"
+                        >
+                        <i class="fa-solid fa-xmark removemark1" v-if="twocol === 6" @click="removeoption(index)"></i>
+                        <i class="fa-solid fa-xmark removemark2" v-if="twocol === 12" @click="removeoption(index)"></i>
+
+                    </div>
+                </div>
+
+
+                <button class="btn addnewbtn1" @click="addcheck">+</button>
+
+                <hr>
+                <div class="d-flex">
+                    <input type="checkbox" v-model="editcomponent.two_columns" @change="twocolumns">
+                    <h5 class="m-auto ms-1">دو ستونی</h5>
+                </div>
+
+                <hr>
+                <div class="d-flex">
+                    <input type="checkbox" v-model="editcomponent.required">
+                    <h5 class="m-auto ms-1">اجباری بودن فیلد</h5>
+                </div>
+                <hr>
+
+
+                <button class="btn addnewbtn1" @click="componentsetting" data-bs-dismiss="modal">تایید</button>
+
+
+            </div>
+
+
+        </div>
+
+    </div>
+</div>
+<div class="modal fade" id="tablemodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4>تنظبمات</h4>
+                <hr>
+            </div>
+            <div class="modal-body p-5 row">
+                <h5 class="col-6">عنوان ستون</h5>
+                <h5 class="col-6">نوع ستون</h5>
+
+                <div class="mb-1 position-relative row"
+                     v-for="(option,index) in editcomponent.columns">
+                    <div class="col-6">
+                        <input type="text" class="form-control my-2 py-2 "
+                               :id="'optionvalue' + index" :placeholder="'انتخاب' +' ' +(index + 1)"
+                               v-model="option.title"
+                        >
+                        <i class="fa-solid fa-xmark removemark3" @click="removecolumn(index)"></i>
+                    </div>
+
+                    <div class="col-6">
+                        <select class="form-select col-6 my-2" aria-label="Default select example"
+                                v-model="option.type">
+                            <option value="email">ایمیل</option>
+                            <option value="text">متن</option>
+
+                            <option value="checkbox">چک باکس</option>
+                            <option value="number">عدد</option>
+                            <option value="tel">شماره</option>
+                        </select>
+
+                    </div>
+
+
+                </div>
+
+
+                <button class="btn addnewbtn1 my-3" @click="addcolumn">+</button>
+
+                <hr>
+                <div class="mb-1 position-relative col-12"
+                     v-for="(option,index) in editcomponent.rows">
+
+                    <input type="text" class="form-control my-2 py-2" v-model="option.title">
+                    <i class="fa-solid fa-xmark removemark2" @click="removerow(index)"></i>
+
+                </div>
+                <button class="btn addnewbtn1 my-3" @click="addrow">+</button>
+                <hr>
+                <div class="d-flex my-3">
+                    <input type="checkbox" v-model="editcomponent.required">
+                    <h5 class="m-auto ms-1">اجباری بودن فیلد</h5>
+                </div>
+                <hr>
+                <button class="btn addnewbtn1" @click="componentsetting" data-bs-dismiss="modal">تایید</button>
+            </div>
+
+
+        </div>
+
+
+    </div>
+
+</div>
+<div class="modal fade" id="deletemodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                    آیا از حذف این آیتم مطمِین هستید؟
+                </h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn addnewbtn1" @click="deletecomponent(componentindex)"
+                        data-bs-dismiss="modal">تایید
+                </button>
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">لغو</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+</div>
+
+
+<script src="clock%20and%20date%20picker/jquery-3.6.0.min.js"></script>
+<script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="VueJs/vue.global.js"></script>
+<script src="clock%20and%20date%20picker/clockpicker.min.js"></script>
+<script src="clock%20and%20date%20picker/mds.bs.datetimepicker.js"></script>
+<script src="VueJs/vue.global.js"></script>
+<script>
+
+</script>
+<div class="popover clockpicker-popover clockpicker-align-bottom d-none">
+    <div class="arrow"></div>
+    <div class="popover-title"><span class="clockpicker-span-hours">18</span> : <span
+            class="clockpicker-span-minutes text-primary">25</span><span class="clockpicker-span-am-pm"></span></div>
+    <div class="popover-content">
+        <div class="clockpicker-plate">
+            <div class="clockpicker-canvas">
+                <svg class="clockpicker-svg" width="200" height="200">
+                    <g transform="translate(100,100)">
+                        <circle class="clockpicker-canvas-bg clockpicker-canvas-bg-trans" r="13" cx="40.00000000000003"
+                                cy="69.28203230275508"></circle>
+                        <circle class="clockpicker-canvas-fg" r="3.5" cx="40.00000000000003"
+                                cy="69.28203230275508"></circle>
+                        <line x1="0" y1="0" x2="40.00000000000003" y2="69.28203230275508"></line>
+                        <circle class="clockpicker-canvas-bearing" cx="0" cy="0" r="2"></circle>
+                    </g>
+                </svg>
+            </div>
+            <div class="clockpicker-dial clockpicker-hours clockpicker-dial-out" style="visibility: hidden;">
+                <div class="clockpicker-tick" style="left: 87px; top: 7px;">00</div>
+                <div class="clockpicker-tick" style="left: 114px; top: 40.2346px; font-size: 120%;">1</div>
+                <div class="clockpicker-tick" style="left: 133.765px; top: 60px; font-size: 120%;">2</div>
+                <div class="clockpicker-tick" style="left: 141px; top: 87px; font-size: 120%;">3</div>
+                <div class="clockpicker-tick" style="left: 133.765px; top: 114px; font-size: 120%;">4</div>
+                <div class="clockpicker-tick" style="left: 114px; top: 133.765px; font-size: 120%;">5</div>
+                <div class="clockpicker-tick" style="left: 87px; top: 141px; font-size: 120%;">6</div>
+                <div class="clockpicker-tick" style="left: 60px; top: 133.765px; font-size: 120%;">7</div>
+                <div class="clockpicker-tick" style="left: 40.2346px; top: 114px; font-size: 120%;">8</div>
+                <div class="clockpicker-tick" style="left: 33px; top: 87px; font-size: 120%;">9</div>
+                <div class="clockpicker-tick" style="left: 40.2346px; top: 60px; font-size: 120%;">10</div>
+                <div class="clockpicker-tick" style="left: 60px; top: 40.2346px; font-size: 120%;">11</div>
+                <div class="clockpicker-tick" style="left: 87px; top: 33px; font-size: 120%;">12</div>
+                <div class="clockpicker-tick" style="left: 127px; top: 17.718px;">13</div>
+                <div class="clockpicker-tick" style="left: 156.282px; top: 47px;">14</div>
+                <div class="clockpicker-tick" style="left: 167px; top: 87px;">15</div>
+                <div class="clockpicker-tick" style="left: 156.282px; top: 127px;">16</div>
+                <div class="clockpicker-tick" style="left: 127px; top: 156.282px;">17</div>
+                <div class="clockpicker-tick" style="left: 87px; top: 167px;">18</div>
+                <div class="clockpicker-tick" style="left: 47px; top: 156.282px;">19</div>
+                <div class="clockpicker-tick" style="left: 17.718px; top: 127px;">20</div>
+                <div class="clockpicker-tick" style="left: 7px; top: 87px;">21</div>
+                <div class="clockpicker-tick" style="left: 17.718px; top: 47px;">22</div>
+                <div class="clockpicker-tick" style="left: 47px; top: 17.718px;">23</div>
+            </div>
+            <div class="clockpicker-dial clockpicker-minutes clockpicker-dial-out" style="visibility: visible;">
+                <div class="clockpicker-tick" style="left: 87px; top: 7px; font-size: 120%;">00</div>
+                <div class="clockpicker-tick" style="left: 127px; top: 17.718px; font-size: 120%;">05</div>
+                <div class="clockpicker-tick" style="left: 156.282px; top: 47px; font-size: 120%;">10</div>
+                <div class="clockpicker-tick" style="left: 167px; top: 87px; font-size: 120%;">15</div>
+                <div class="clockpicker-tick" style="left: 156.282px; top: 127px; font-size: 120%;">20</div>
+                <div class="clockpicker-tick" style="left: 127px; top: 156.282px; font-size: 120%;">25</div>
+                <div class="clockpicker-tick" style="left: 87px; top: 167px; font-size: 120%;">30</div>
+                <div class="clockpicker-tick" style="left: 47px; top: 156.282px; font-size: 120%;">35</div>
+                <div class="clockpicker-tick" style="left: 17.718px; top: 127px; font-size: 120%;">40</div>
+                <div class="clockpicker-tick" style="left: 7px; top: 87px; font-size: 120%;">45</div>
+                <div class="clockpicker-tick" style="left: 17.718px; top: 47px; font-size: 120%;">50</div>
+                <div class="clockpicker-tick" style="left: 47px; top: 17.718px; font-size: 120%;">55</div>
+            </div>
+        </div>
+        <span class="clockpicker-am-pm-block"></span></div>
+</div>
+<script>
+    let dtp = null;
+    let indexg = null
+    let app = Vue.createApp({
+        delimiters: ['[[', ']]'],
+        data() {
+            return {
+                twocol: 12,
+                dtp: [],
+                error: null,
+                bool: false,
+                editcomponent: {},
+                outputdata: [],
+                componentindex: null,
+                components: [],
+                numberofcomponent: null,
+                itemcomponents: [
+                    {
+                        'name': 'عنوان',
+                        'icon': '<img src="icons/تیتر.svg" class="w-75">',
+                        "type": "header",
+                        "title": "عنوان پیش فرض",
+                        'code': '<div class="componentholder"> <div class="settingmenu d-none"><p class="m-0 ms-4 settingicon" data-bs-toggle="modal" data-bs-target="#edittitlemodal"> <img src="icons/setting.svg" class="w-75" alt=""></p>      <p class="m-0 ms-4 deleteicon" data-bs-toggle="modal" data-bs-target="#deletemodal"><img src="icons/delete.svg" class="w-75" alt=""></p></div><div class="componentfield"> <h4 class="py-2 mt-5">عنوان پیش فرض</h4> </div></div>'
+                    },
+                    {
+                        'name': 'منو کشویی',
+                        'icon': '<img src="icons/منو%20کشویی.svg" class="w-75">',
+                        'type': 'select',
+                        "title": "عنوان پرسش",
+                        "label": "زیر متن",
+                        "options": ['1'],
+                        "default_option": null,
+                        "required": false,
+                        'code': ' <div class="componentholder">\n' +
+                            `            <div class="settingmenu d-none"><p class="m-0 ms-4 settingicon" data-bs-toggle="modal" data-bs-target="#selectmodal"> <img src="icons/setting.svg" class="w-75" alt=""> </p>\n` +
+                            '                <p class="m-0 ms-4 deleteicon" data-bs-toggle="modal" data-bs-target="#deletemodal"><img src="icons/delete.svg" class="w-75" alt=""></p></div>\n' +
+                            '            <div class="componentfield"><h4 class=""></h4> <select class="form-select py-3" ><option value="">گزینه پیش فرض</option></select> <small></small>\n' +
+                            '            </div>\n' +
+                            '        </div>'
+                    },
+                    {
+
+                        'name': 'ورودی',
+                        'icon': '<img src="icons/ورودی.svg" class="w-75">',
+                        'type': 'input',
+                        "title": "عنوان",
+                        "placeholder": "متن پیش فرض",
+                        "label": "زیر متن",
+                        "inputtype": "text",
+                        "required": false,
+
+
+                        'code': ' <div class="componentholder">\n' +
+                            `            <div class="settingmenu d-none"><p class="m-0 ms-4 settingicon" data-bs-toggle="modal" data-bs-target="#editinputmodal"> <img src="icons/setting.svg" class="w-75" alt=""></p>\n` +
+                            '                <p class="m-0 ms-4 deleteicon" data-bs-toggle="modal" data-bs-target="#deletemodal"><img src="icons/delete.svg" class="w-75" alt=""></p></div>\n' +
+                            '            <div class="componentfield"><h4 class=""></h4> <input type="text" class="form-control py-3"\n' +
+                            '                                                                      placeholder=""> <small></small>\n' +
+                            '            </div>\n' +
+                            '        </div>'
+                    },
+                    {
+                        'name': 'متن',
+                        'icon': '<img src="icons/متن.svg" class="w-75">',
+                        "type": "textarea",
+                        "title": "عنوان",
+                        "placeholder": "متن پیش فرض",
+                        "label": "زیر متن",
+                        "required": false,
+                        'code': ' <div class="componentholder ">\n' +
+                            `            <div class="settingmenu d-none"><p class="m-0 ms-4 settingicon" data-bs-toggle="modal" data-bs-target="#editinputmodal"> <img src="icons/setting.svg" class="w-75" alt=""></p>\n` +
+                            '                <p class="m-0 ms-4 deleteicon" data-bs-toggle="modal" data-bs-target="#deletemodal"><img src="icons/delete.svg" class="w-75" alt=""></p></div>\n' +
+                            '            <div class="componentfield"><h4 class=""></h4> <textarea class="form-control "\n' +
+                            '                                                                      placeholder=""></textarea> <small></small>\n' +
+                            '            </div>\n' +
+                            '        </div>'
+
+
+                    },
+                    {
+                        "name": "افزودن فایل",
+                        'icon': '<img src="icons/افزودن%20فایل.svg" class="w-75">',
+                        'type': 'file',
+                        "title": "عنوان",
+                        "label": "زیر متن",
+                        "formats": [],
+                        "max_size": "1024",
+                        "min_size": "128",
+                        "required": false,
+
+                        'code': ' <div class="componentholder ">\n' +
+                            `            <div class="settingmenu d-none"><p class="m-0 ms-4 settingicon" data-bs-toggle="modal" data-bs-target="#uploadfilemodal"> <img src="icons/setting.svg" class="w-75" alt=""></p>\n` +
+                            '                <p class="m-0 ms-4 deleteicon" data-bs-toggle="modal" data-bs-target="#deletemodal"><img src="icons/delete.svg" class="w-75" alt=""></p></div>\n' +
+                            '            <div class="componentfield"><h4 class="mb-3"></h4> <label for="uploadfileinput" class="btn border-3 border-dark ">بارگزاری</label> <input id="uploadfileinput" class="visually-hidden" type="file" \n' +
+                            '                                                                      placeholder=""></input> <small class="d-block"></small>  <strong id="errormessage"></strong> \n' +
+                            '            </div>\n' +
+                            '        </div>'
+                    },
+                    {
+                        "name": "پاراگراف",
+                        'icon': '<img src="icons/پاراگراف.svg" class="w-75">',
+                        'type': "paragraph",
+                        "title": "متن پاراگراف پیش فرض",
+                        'code': '<div class="componentholder"> <div class="settingmenu d-none"><p class="m-0 ms-4 settingicon" data-bs-toggle="modal" data-bs-target="#edittitlemodal"> <img src="icons/setting.svg" class="w-75" alt=""> </p>      <p class="m-0 ms-4 deleteicon" data-bs-toggle="modal" data-bs-target="#deletemodal"><img src="icons/delete.svg" class="w-75" alt=""></p></div><div class="componentfield"> <h4 class="py-2 mt-5">متن پاراگراف پیش فرض</h4> </div></div>'
+
+                    },
+                    {
+                        'name': 'جدا کننده',
+                        'icon': '<img src="icons/جداکننده.svg" class="w-75">',
+                        'type': "splitter",
+                        'code': '<hr>'
+                    },
+                    {
+                        'name': 'فضای خالی',
+                        'icon': '<img src="icons/فضای%20خالی.svg" class="w-75">',
+                        'type': 'space',
+                        'code': '<div class="m-5 p-5"></div>'
+                    },
+                    {
+                        'name': 'زمان',
+                        'icon': '<img src="icons/زمان.svg" class="w-75">',
+                        'type': 'time',
+                        "title": "عنوان",
+                        "label": "زیر متن.",
+                        "required": false,
+                        'code': ' <div class="componentholder"><div class="settingmenu d-none"><p class="m-0 ms-4 settingicon" data-bs-toggle="modal" data-bs-target="#editinputmodal"> <img src="icons/setting.svg" class="w-75" alt=""> </p><p class="m-0 ms-4 deleteicon" data-bs-toggle="modal" data-bs-target="#deletemodal"><img src="icons/delete.svg" class="w-75" alt=""></p></div><div class="componentfield"><h4 class=""></h4><div class = "input-group mb-3" ><span class = "input-group-text bg-white" id = "basic-addon1" > <i class = "fa-solid fa-clock" > </i></span ><input id="start_time" name="start_time" type="text" class="form-control py-2 clockpicker" ></div> <small></small ></div></div>'
+                    },
+                    {
+                        'name': 'تاریخ',
+                        'icon': '<img src="icons/تاریخ.svg" class="w-75">',
+                        'type': 'date',
+                        "title": "عنوان",
+                        "label": "زیر متن.",
+                        "required": false,
+                        "beforetoday": false,
+                        'code': ' <div class="componentholder"><div class="settingmenu d-none"><p class="m-0 ms-4 settingicon" data-bs-toggle="modal" data-bs-target="#editinputmodal"> <img src="icons/setting.svg" class="w-75" alt=""></p><p class="m-0 ms-4 deleteicon" data-bs-toggle="modal" data-bs-target="#deletemodal"><img src="icons/delete.svg" class="w-75" alt=""></p></div><div class="componentfield"><h4 class=""></h4><div class = "input-group mb-3" ><span class = "input-group-text bg-white" id = "basic-addon1" > <i class = "fa-solid fa-clock" > </i></span ><input type="text" class="form-control py-2 datepicker" data-name="date" data-mds-dtp-guid="27c14080-893f-458e-9d3e-35c69d0d60f0" name="date"></div> <small></small ></div></div>'
+                    },
+                    {
+                        'name': 'انتخاب چند تایی',
+                        'icon': '<img src="icons/انتخاب%20چندتایی.svg" class="w-75">',
+                        "type": "check",
+                        "title": "عنوان پرسش",
+                        "options": ['1'],
+                        "two_columns": false,
+                        "required": false,
+                        'code': ' <div class="componentholder ">\n' +
+                            `            <div class="settingmenu d-none"><p class="m-0 ms-4 settingicon" data-bs-toggle="modal" data-bs-target="#checkmodal"> <img src="icons/setting.svg" class="w-75" alt=""> </p>\n` +
+                            '                <p class="m-0 ms-4 deleteicon" data-bs-toggle="modal" data-bs-target="#deletemodal"><img src="icons/delete.svg" class="w-75" alt=""></p></div>\n' +
+                            '            <div class="componentfield"><h4 class=""></h4> <div class="row"></div> \n' +
+                            '            </div>\n' +
+                            '        </div>'
+                    },
+                    {
+                        'name': 'انتخاب تکی',
+                        'icon': '<img src="icons/انتخاب%20تکی.svg" class="w-75">',
+                        "type": "radio",
+                        "title": "عنوان پرسش",
+                        "options": ['1'],
+                        "two_columns": false,
+                        "required": false,
+                        'code': ' <div class="componentholder ">\n' +
+                            `            <div class="settingmenu d-none"><p class="m-0 ms-4 settingicon" data-bs-toggle="modal" data-bs-target="#checkmodal"> <img src="icons/setting.svg" class="w-75" alt=""> </p>\n` +
+                            '                <p class="m-0 ms-4 deleteicon" data-bs-toggle="modal" data-bs-target="#deletemodal"><img src="icons/delete.svg" class="w-75" alt=""></p></div>\n' +
+                            '            <div class="componentfield"><h4 class=""></h4> <div class="row"></div> \n' +
+                            '            </div>\n' +
+                            '        </div>'
+                    },
+                    {
+                        'name': 'جدول',
+                        'icon': '<img src="icons/جدول.svg" class="w-75">',
+                        'type': 'table',
+                        "columns": [],
+                        "rows": [],
+                        "required": false,
+                        'code': ' <div class="componentholder ">\n' +
+                            `            <div class="settingmenu d-none"><p class="m-0 ms-4 settingicon" data-bs-toggle="modal" data-bs-target="#tablemodal"> <img src="icons/setting.svg" class="w-75" alt=""> </p>\n` +
+                            '                <p class="m-0 ms-4 deleteicon" data-bs-toggle="modal" data-bs-target="#deletemodal"><img src="icons/delete.svg" class="w-75" alt=""></p></div>\n' +
+                            '            <div class="componentfield "><table class="table">\n' +
+                            '  <thead>\n' +
+                            '<th scope="col">         </th>\n' +
+                            '<th scope="col">ستون اول</th>\n' +
+                            '<th scope="col">ستون دوم</th>\n' +
+                            '  </thead>\n' +
+                            '  <tbody>\n' +
+                            '<tr><th scope="row">سطر اول</th></tr>\n' +
+                            '<tr><th scope="row">سطر دوم</th></tr>\n' +
+                            '  </tbody>\n' +
+                            '</table> \n' +
+                            '            </div>\n' +
+                            '        </div>'
+                    }
+
+                ]
+            }
+        },
+        methods: {
+            addnewcomponent(number) {
+                console.log(number)
+                let col = 12
+                if (number === 2) {
+                    col = 6;
+                }
+
+                for (let i = 0; i < number; i++) {
+                    this.components.push({
+                        'col': col,
+                    })
+
+                }
+
+
+            },
+            getindex(index) {
+                this.componentindex = index
+                indexg = index
+                console.log(index)
+                this.editcomponent = this.components[index]
+                if (this.editcomponent.name === 'file') {
+                    this.uploadfilecheck(this.editcomponent)
+                }
+            },
+            createcomponent(value) {
+
+
+                let formholder = document.getElementById('component' + this.componentindex)
+                formholder.removeAttribute('data-bs-toggle')
+                formholder.innerHTML = value.code;
+                let savecol = this.components[this.componentindex].col;
+
+                if (value.type === 'header' || value.type === 'paragraph') {
+                    this.components[this.componentindex] = {
+                        "col": savecol,
+                        "name": value.type,
+                        "title": value.title
+                    }
+                    this.outputdata[this.componentindex] = this.components[this.componentindex]
+
+                }
+                if (value.type === 'check' || value.type === 'radio') {
+                    this.components[this.componentindex] = {
+                        "col": savecol,
+                        "name": value.type,
+                        "title": value.title,
+                        "options": [],
+                        "two_columns": value.two_columns,
+                        "required": value.required
+                    }
+                    this.outputdata[this.componentindex] = this.components[this.componentindex]
+                    let component = formholder.getElementsByClassName('componentfield');
+                    component[0].getElementsByTagName('h4')[0].innerHTML = this.components[this.componentindex].title
+
+
+                }
+                if (value.type === 'time' || value.type === 'date') {
+
+                    this.components[this.componentindex] = {
+                        "col": savecol,
+                        "name": value.type,
+                        "title": value.title,
+                        'label': value.label,
+                        'required': value.required,
+
+                    }
+                    this.outputdata[this.componentindex] = this.components[this.componentindex]
+                    let component = formholder.getElementsByClassName('componentfield');
+                    component[0].getElementsByTagName('h4')[0].innerHTML = this.components[this.componentindex].title
+                    if (value.type === 'date') {
+                        this.components[this.componentindex] = {
+                            "col": savecol,
+                            "name": value.type,
+                            "title": value.title,
+                            'label': value.label,
+                            'required': value.required,
+                            'beforetoday': value.beforetoday
+                        }
+                        component[0].getElementsByClassName('datepicker')[0].setAttribute('id', 'date' + this.componentindex)
+                        component[0].getElementsByClassName('datepicker')[0].setAttribute('data-name', 'date' + this.componentindex)
+                        component[0].getElementsByClassName('datepicker')[0].setAttribute('data-name', 'text' + this.componentindex)
+
+                        this.dtp[this.componentindex] = new mds.MdsPersianDateTimePicker(document.getElementById('date' + this.componentindex), {
+                            targetTextSelector: `[data-name=text${this.componentindex}]`,
+                            targetDateSelector: `[data-name=date${this.componentindex}]`,
+                            dateFormat: 'yyyy-MM-dd',
+                            textFormat: 'yyyy-MM-dd',
+                            persianNumber: false,
+
+                        });
+                    } else {
+                        component[0].getElementsByClassName('clockpicker')[0].setAttribute('onclick', this.timeholder())
+                    }
+
+                    component[0].getElementsByTagName('small')[0].innerHTML = this.components[this.componentindex].label
+
+                }
+                if (value.type === "splitter" || value.type === 'space') {
+                    this.components[this.componentindex] = {
+                        "col": savecol,
+                        "name": value.type,
+
+                    }
+                    this.outputdata[this.componentindex] = this.components[this.componentindex]
+
+                }
+                if (value.type === 'select') {
+                    this.components[this.componentindex] = {
+                        "col": savecol,
+                        "name": value.type,
+                        "title": value.title,
+                        "label": value.label,
+                        "options": [],
+                        "default_option": value.default_option,
+                        "required": value.required
+
+                    }
+                    this.outputdata[this.componentindex] = this.components[this.componentindex]
+                    let component = formholder.getElementsByClassName('componentfield');
+                    component[0].getElementsByTagName('h4')[0].innerHTML = this.components[this.componentindex].title
+                    component[0].getElementsByTagName('small')[0].innerHTML = this.components[this.componentindex].label
+
+                }
+
+                if (value.type === 'input') {
+                    this.components[this.componentindex] = {
+                        'col': savecol,
+                        'name': value.type,
+                        'title': value.title,
+                        'placeholder': value.placeholder,
+                        'label': value.label,
+                        'type': value.inputType,
+                        'required': value.required,
+                    }
+                    this.outputdata[this.componentindex] = this.components[this.componentindex]
+                    let component = formholder.getElementsByClassName('componentfield');
+                    component[0].getElementsByTagName('h4')[0].innerHTML = this.components[this.componentindex].title
+                    component[0].getElementsByTagName('input')[0].setAttribute('placeholder', this.components[this.componentindex].placeholder)
+                    component[0].getElementsByTagName('small')[0].innerHTML = this.components[this.componentindex].label
+
+                }
+                if (value.type === 'table') {
+                    this.components[this.componentindex] = {
+                        'col': savecol,
+                        'name': value.type,
+                        "columns": [],
+                        "rows": [],
+                        "required": value.required
+                    }
+                    this.outputdata[this.componentindex] = this.components[this.componentindex]
+
+                }
+                if (value.type === 'file') {
+                    this.components[this.componentindex] = {
+                        'col': savecol,
+                        'name': value.type,
+                        'title': value.title,
+                        'label': value.label,
+                        'min_size': value.min_size,
+                        'max_size': value.max_size,
+                        'formats': value.formats,
+                        'required': value.required,
+                    }
+                    this.outputdata[this.componentindex] = this.components[this.componentindex]
+                    let component = formholder.getElementsByClassName('componentfield');
+                    component[0].getElementsByTagName('h4')[0].innerHTML = this.components[this.componentindex].title
+                    component[0].getElementsByTagName('input')[0].setAttribute('placeholder', this.components[this.componentindex].placeholder)
+                    component[0].getElementsByTagName('small')[0].innerHTML = this.components[this.componentindex].label
+
+                }
+                if (value.type === 'textarea') {
+                    this.components[this.componentindex] = {
+                        'col': savecol,
+                        'name': value.type,
+                        'title': value.title,
+                        'placeholder': value.placeholder,
+                        'label': value.label,
+                        'required': value.required,
+                    }
+                    this.outputdata[this.componentindex] = this.components[this.componentindex]
+                    let component = formholder.getElementsByClassName('componentfield');
+                    component[0].getElementsByTagName('h4')[0].innerHTML = this.components[this.componentindex].title
+                    component[0].getElementsByTagName('textarea')[0].setAttribute('placeholder', this.components[this.componentindex].placeholder)
+                    component[0].getElementsByTagName('small')[0].innerHTML = this.components[this.componentindex].label
+
+                }
+                console.log(this.outputdata)
+
+            },
+            componentsetting() {
+                let component = this.components[this.componentindex]
+                component = this.editcomponent
+                this.outputdata[this.componentindex] = component
+
+                let formholder = document.getElementById('component' + this.componentindex)
+                let component0 = formholder.getElementsByClassName('componentfield');
+                try {
+                    if (component.name === 'input' || component.name === 'paragraph' || component.name === 'header') {
+                        component0[0].getElementsByTagName('h4')[0].innerHTML = component.title
+                        component0[0].getElementsByTagName('input')[0].setAttribute('placeholder', component.placeholder)
+                        component0[0].getElementsByTagName('input')[0].setAttribute('type', component.type)
+                        component0[0].getElementsByTagName('small')[0].innerHTML = component.label
+                        if (component.required === true) {
+                            component0[0].getElementsByTagName('input')[0].setAttribute('required', '')
+                        }
+                    }
+                    if (component.name === 'textarea') {
+                        component0[0].getElementsByTagName('h4')[0].innerHTML = component.title
+                        component0[0].getElementsByTagName('textarea')[0].setAttribute('placeholder', component.placeholder)
+                        component0[0].getElementsByTagName('small')[0].innerHTML = component.label
+                        if (component.required === true) {
+                            component0[0].getElementsByTagName('textarea')[0].setAttribute('required', '')
+                        }
+                    }
+                    if (component.name === 'time') {
+                        component0[0].getElementsByTagName('h4')[0].innerHTML = component.title
+                        component0[0].getElementsByTagName('small')[0].innerHTML = component.label
+                        if (component.required === true) {
+                            component0[0].getElementsByTagName('input')[0].setAttribute('required', '')
+                        }
+                    }
+                    if (component.name === 'date') {
+
+                        component0[0].getElementsByTagName('h4')[0].innerHTML = component.title
+                        component0[0].getElementsByTagName('small')[0].innerHTML = component.label
+
+                        if (component.beforetoday === true) {
+                            this.dtp[this.componentindex].updateOption('disableBeforeToday', true)
+
+
+                        } else {
+                            this.dtp[this.componentindex].updateOption('disableBeforeToday', false)
+                        }
+
+                        if (component.required === true) {
+                            component0[0].getElementsByTagName('input')[0].setAttribute('required', '')
+                        }
+                    }
+                    if (component.name === 'select') {
+                        component0[0].getElementsByTagName('h4')[0].innerHTML = component.title
+                        let optopnstag = component.options
+                        component = this.editcomponent
+                        let optiontag = null
+                        for (let item of component.options) {
+                            if (item === component.default_option) {
+                                optiontag = `<option value="${item}" selected>${item}</option>`
+                            } else {
+                                optiontag = `<option value="${item}">${item}</option>`
+                            }
+
+                            optopnstag += optiontag
+                        }
+                        this.outputdata[this.componentindex] = component
+
+
+                        component0[0].getElementsByTagName('select')[0].innerHTML = optopnstag
+
+                        component0[0].getElementsByTagName('small')[0].innerHTML = component.label
+                        if (component.required === true) {
+                            component0[0].getElementsByTagName('select')[0].setAttribute('required', '')
+                        }
+                    }
+                    if (component.name === 'table') {
+
+                        let coulmns = ''
+                        let rows = ''
+
+                        component = this.editcomponent
+                        let optiontag = null
+                        for (let item of component.columns) {
+                            optiontag = `<th>${item.title}</th>`
+
+                            coulmns += optiontag
+                        }
+                        for (let item of component.rows) {
+                            let colomnsvalue = ''
+                            for (let col in component.columns) {
+                                colomnsvalue += `<td><input type="${component.columns[col].type}"></td>`
+                            }
+                            optiontag = `<tr> <th scope="row">${item.title}</th>` + colomnsvalue + `</tr>`
+
+                            rows += optiontag
+                        }
+                        this.outputdata[this.componentindex] = component
+
+                        component0[0].getElementsByTagName('thead')[0].innerHTML = coulmns
+
+
+                        component0[0].getElementsByTagName('tbody')[0].innerHTML = rows
+                        if (component.required === true) {
+                            component0[0].getElementsByTagName('select')[0].setAttribute('required', '')
+                        }
+                    }
+                    if (component.name === 'check' || component.name === 'radio') {
+                        component0[0].getElementsByTagName('h4')[0].innerHTML = component.title
+                        let optopnstag = ''
+                        component = this.editcomponent
+                        let optiontag = null
+                        for (let item in component.options) {
+                            if (component.name === 'check') {
+                                if (component.two_columns) {
+                                    optiontag = `<div class="col-6 form-check"><label class="form-check-label">${component.options[item].title}</label><input  class="form-check-input" type="checkbox"></div>`
+                                } else {
+                                    optiontag = `<div class="col-12 form-check"><label class="form-check-label">${component.options[item].title}</label><input  class="form-check-input" type="checkbox"></div>`
+
+                                }
+                            } else {
+
+                                if (component.two_columns) {
+                                    if (item == 0) {
+                                        optiontag = `<div class="col-6 form-check"><label class="form-check-label">${component.options[item].title}</label><input name="radiobutton${this.componentindex}" class="form-check-input" type="radio" checked></div>`
+                                    } else {
+                                        optiontag = `<div class="col-6 form-check"><label class="form-check-label">${component.options[item].title}</label><input name="radiobutton${this.componentindex}" class="form-check-input" type="radio"></div>`
+
+                                    }
+                                } else {
+                                    if (item == 0) {
+                                        console.log('check')
+                                        optiontag = `<div class="col-12 form-check"><label class="form-check-label">${component.options[item].title}</label><input name="radiobutton${this.componentindex}" class="form-check-input" type="radio" checked></div>`
+
+                                    } else {
+                                        optiontag = `<div class="col-12 form-check"><label class="form-check-label">${component.options[item].title}</label><input name="radiobutton${this.componentindex}" class="form-check-input" type="radio"></div>`
+
+                                    }
+
+                                }
+                            }
+
+                            optopnstag += optiontag
+
+
+                        }
+                        this.outputdata[this.componentindex] = component
+
+                        component0[0].getElementsByTagName('div')[0].innerHTML = optopnstag
+                        if (component.required === true) {
+                            component0[0].getElementsByTagName('div')[0].setAttribute('required', '')
+                        }
+                    }
+                    if (component.name === 'file') {
+                        component0[0].getElementsByTagName('h4')[0].innerHTML = component.title
+                        component0[0].getElementsByTagName('small')[0].innerHTML = component.label
+                        let checks = document.getElementsByClassName('filetype')
+                        component.formats = []
+                        for (let i = 0; i < 20; i++) {
+
+                            if (checks[i].checked) {
+                                if (checks[i].value === 'همه') {
+                                    for (let i = 0; i < 20; i++) {
+                                        component.formats.push(checks[i].value)
+                                    }
+
+
+                                } else {
+                                    component.formats.push(checks[i].value)
+                                }
+
+                            }
+                        }
+                        this.outputdata[this.componentindex] = component
+                        let format = component.formats.toString()
+
+                        component0[0].getElementsByTagName('input')[0].setAttribute('accept', format)
+                        component0[0].getElementsByTagName('input')[0].setAttribute('onchange', this.uploadfilecheck(component))
+                        if (component.required === true) {
+                            component0[0].getElementsByTagName('input')[0].setAttribute('required', '')
+                        }
+                    }
+
+                } catch (e) {
+                    console.log(e)
+                }
+
+
+            },
+            uploadfilecheck(component) {
+                let uploadinput = document.getElementById('uploadfileinput')
+                let errormsg = document.getElementById('errormessage')
+                let bool = false
+                uploadinput.addEventListener('change', function () {
+
+                    for (let i = 0; i < this.files.length; i++) {
+
+
+                        let file = this.files[i]
+                        for (let item of component.formats) {
+                            console.log(item)
+                            if (file.name.endsWith(item)) {
+                                bool = true
+                                break;
+                            }
+                            else {
+                                bool = false
+
+                            }
+                        }
+                        if (bool === true) {
+                            if (file.size / 1024 > component.max_size || file.size / 1024 < component.min_size) {
+                                uploadinput.value = ''
+                                this.error = "اندازه فایل مناسب نیست"
+                                errormsg.innerHTML = this.error
+                            } else {
+                                this.error = "فایل با موفقیت آپلود شد"
+                                errormsg.innerHTML = this.error
+                            }
+                        }
+                        else {
+                            uploadinput.value = ''
+                            this.error = 'فایل مجاز نیست'
+                            errormsg.innerHTML = this.error
+                        }
+
+
+                    }
+
+                })
+
+
+            },
+            addoption() {
+
+
+                this.components[this.componentindex].options.push('انتخاب' + ' ' + (this.components[this.componentindex].options.length + 1))
+
+            },
+            addcheck() {
+
+
+                this.components[this.componentindex].options.push({'title': 'انتخاب' + ' ' + (this.components[this.componentindex].options.length + 1)})
+                this.twocolumns()
+            },
+            removeoption(index) {
+                this.editcomponent.options.splice(index, 1)
+            },
+            getoptions() {
+                for (let item in this.components[this.componentindex].options) {
+
+                    let inputvalue = document.getElementById('optionvalue' + item)
+                    console.log(inputvalue.value)
+                    this.components[this.componentindex].options[item] = inputvalue.value
+                    console.log(item, inputvalue.value)
+                }
+                for (let i = 0; i < this.components[this.componentindex].options.length; i++) {
+                    let option = document.getElementById('optionvalue' + i)
+
+                    let placevalue = option.getAttribute('placeholder')
+
+                    if (option.value) {
+                        this.components[this.componentindex].options[i] = option.value
+                    } else {
+                        this.components[this.componentindex].options[i] = placevalue
+                    }
+
+
+                }
+
+
+            },
+            timeholder() {
+                console.log('datetime')
+
+
+                $('.clockpicker').clockpicker({
+                    placement: 'left',
+                    align: 'left',
+                    donetext: 'انتخاب',
+                    autoclose: true,
+                });
+            },
+            twocolumns() {
+                this.twocol = 12
+                if (this.editcomponent.two_columns) {
+                    this.twocol = 6
+                }
+
+
+            },
+            addrow() {
+                this.components[this.componentindex].rows.push({'title': 'سطر' + ' ' + (this.components[this.componentindex].rows.length + 1)})
+            },
+            addcolumn() {
+                this.components[this.componentindex].columns.push({
+                    'title': 'ستون' + ' ' + (this.components[this.componentindex].columns.length + 1),
+                    'type': 'text'
+                })
+            },
+            removerow(index) {
+                this.components[this.componentindex].rows.splice(index, 1)
+
+
+            },
+            removecolumn(index) {
+                this.components[this.componentindex].columns.splice(index, 1)
+
+
+            },
+            deletecomponent(index) {
+                console.log(index)
+                let formhandler = document.getElementById('formholder')
+                let component = document.getElementById('component' + index)
+                this.components[index] = {
+                    'col': this.components[index].col
+                }
+                this.outputdata.splice(index, 1)
+
+                component.setAttribute('data-bs-toggle', 'modal')
+                component.setAttribute('data-bs-target', '#addcomponentmodal')
+                component.innerHTML = '<div class="d-flex justify-content-center nullfield form-control my-5"> <h3 class="addplus">+</h3> </div>'
+
+
+            },
+
+        },
+        mounted() {
+
+        }
+    })
+    app.mount('#app')
+
+
+</script>
+</body>
+</html>
