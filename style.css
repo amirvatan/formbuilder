@@ -23,9 +23,9 @@ ul {
 .addnewbtn1 {
     background: #1BC5BD;
     color: white;
-    width: 10%;
+    width: 15%;
     border: 1px solid #1BC5BD;
-
+    margin-right: 360px;
 }
 
 .addnewbtn1:hover {

@@ -20,7 +20,7 @@
             <h4 class="m-3 ms-3">ایحاد فرم جدید</h4>
             <hr>
             <div class="mx-5">
-                <input type="text" class="form-control my-4 py-2" placeholder="عنوان فرم"></input>
+                <input type="text" class="form-control my-4 py-2" placeholder="عنوان فرم" id="formtitle"></input>
             </div>
 
         </div>
@@ -28,6 +28,87 @@
 
         <div class="row justify-content-center">
             <div class="col-11 row" id="formholder">
+                <div class="popover clockpicker-popover d-none">
+                    <div class="arrow"></div>
+                    <div class="popover-title"><span class="clockpicker-span-hours">18</span> : <span
+                            class="clockpicker-span-minutes text-primary">25</span><span
+                            class="clockpicker-span-am-pm"></span></div>
+                    <div class="popover-content">
+                        <div class="clockpicker-plate">
+                            <div class="clockpicker-canvas">
+                                <svg class="clockpicker-svg" width="200" height="200">
+                                    <g transform="translate(100,100)">
+                                        <circle class="clockpicker-canvas-bg clockpicker-canvas-bg-trans" r="13"
+                                                cx="40.00000000000003"
+                                                cy="69.28203230275508"></circle>
+                                        <circle class="clockpicker-canvas-fg" r="3.5" cx="40.00000000000003"
+                                                cy="69.28203230275508"></circle>
+                                        <line x1="0" y1="0" x2="40.00000000000003" y2="69.28203230275508"></line>
+                                        <circle class="clockpicker-canvas-bearing" cx="0" cy="0" r="2"></circle>
+                                    </g>
+                                </svg>
+                            </div>
+                            <div class="clockpicker-dial clockpicker-hours clockpicker-dial-out"
+                                 style="visibility: hidden;">
+                                <div class="clockpicker-tick" style="left: 87px; top: 7px;">00</div>
+                                <div class="clockpicker-tick" style="left: 114px; top: 40.2346px; font-size: 120%;">1
+                                </div>
+                                <div class="clockpicker-tick" style="left: 133.765px; top: 60px; font-size: 120%;">2
+                                </div>
+                                <div class="clockpicker-tick" style="left: 141px; top: 87px; font-size: 120%;">3</div>
+                                <div class="clockpicker-tick" style="left: 133.765px; top: 114px; font-size: 120%;">4
+                                </div>
+                                <div class="clockpicker-tick" style="left: 114px; top: 133.765px; font-size: 120%;">5
+                                </div>
+                                <div class="clockpicker-tick" style="left: 87px; top: 141px; font-size: 120%;">6</div>
+                                <div class="clockpicker-tick" style="left: 60px; top: 133.765px; font-size: 120%;">7
+                                </div>
+                                <div class="clockpicker-tick" style="left: 40.2346px; top: 114px; font-size: 120%;">8
+                                </div>
+                                <div class="clockpicker-tick" style="left: 33px; top: 87px; font-size: 120%;">9</div>
+                                <div class="clockpicker-tick" style="left: 40.2346px; top: 60px; font-size: 120%;">10
+                                </div>
+                                <div class="clockpicker-tick" style="left: 60px; top: 40.2346px; font-size: 120%;">11
+                                </div>
+                                <div class="clockpicker-tick" style="left: 87px; top: 33px; font-size: 120%;">12</div>
+                                <div class="clockpicker-tick" style="left: 127px; top: 17.718px;">13</div>
+                                <div class="clockpicker-tick" style="left: 156.282px; top: 47px;">14</div>
+                                <div class="clockpicker-tick" style="left: 167px; top: 87px;">15</div>
+                                <div class="clockpicker-tick" style="left: 156.282px; top: 127px;">16</div>
+                                <div class="clockpicker-tick" style="left: 127px; top: 156.282px;">17</div>
+                                <div class="clockpicker-tick" style="left: 87px; top: 167px;">18</div>
+                                <div class="clockpicker-tick" style="left: 47px; top: 156.282px;">19</div>
+                                <div class="clockpicker-tick" style="left: 17.718px; top: 127px;">20</div>
+                                <div class="clockpicker-tick" style="left: 7px; top: 87px;">21</div>
+                                <div class="clockpicker-tick" style="left: 17.718px; top: 47px;">22</div>
+                                <div class="clockpicker-tick" style="left: 47px; top: 17.718px;">23</div>
+                            </div>
+                            <div class="clockpicker-dial clockpicker-minutes clockpicker-dial-out"
+                                 style="visibility: visible;">
+                                <div class="clockpicker-tick" style="left: 87px; top: 7px; font-size: 120%;">00</div>
+                                <div class="clockpicker-tick" style="left: 127px; top: 17.718px; font-size: 120%;">05
+                                </div>
+                                <div class="clockpicker-tick" style="left: 156.282px; top: 47px; font-size: 120%;">10
+                                </div>
+                                <div class="clockpicker-tick" style="left: 167px; top: 87px; font-size: 120%;">15</div>
+                                <div class="clockpicker-tick" style="left: 156.282px; top: 127px; font-size: 120%;">20
+                                </div>
+                                <div class="clockpicker-tick" style="left: 127px; top: 156.282px; font-size: 120%;">25
+                                </div>
+                                <div class="clockpicker-tick" style="left: 87px; top: 167px; font-size: 120%;">30</div>
+                                <div class="clockpicker-tick" style="left: 47px; top: 156.282px; font-size: 120%;">35
+                                </div>
+                                <div class="clockpicker-tick" style="left: 17.718px; top: 127px; font-size: 120%;">40
+                                </div>
+                                <div class="clockpicker-tick" style="left: 7px; top: 87px; font-size: 120%;">45</div>
+                                <div class="clockpicker-tick" style="left: 17.718px; top: 47px; font-size: 120%;">50
+                                </div>
+                                <div class="clockpicker-tick" style="left: 47px; top: 17.718px; font-size: 120%;">55
+                                </div>
+                            </div>
+                        </div>
+                        <span class="clockpicker-am-pm-block"></span></div>
+                </div>
                 <div v-for="(component,index) in components" :class="'col-12'+ ' ' +  'col-md-'+component.col"
                      data-bs-toggle="modal" data-bs-target="#addcomponentmodal" @click="getindex(index)"
                      :id="'component' + index">
@@ -107,7 +188,7 @@
                     <select class="form-select" aria-label="Default select example" v-model="editcomponent.type">
                         <option selected></option>
                         <option value="text">متن</option>
-                        <option value="phone">شماره تلفن</option>
+                        <option value="tel">شماره تلفن</option>
                         <option value="number">عدد</option>
                         <option value="email">ایمیل</option>
                     </select>
@@ -431,67 +512,7 @@
 <script>
 
 </script>
-<div class="popover clockpicker-popover clockpicker-align-bottom d-none">
-    <div class="arrow"></div>
-    <div class="popover-title"><span class="clockpicker-span-hours">18</span> : <span
-            class="clockpicker-span-minutes text-primary">25</span><span class="clockpicker-span-am-pm"></span></div>
-    <div class="popover-content">
-        <div class="clockpicker-plate">
-            <div class="clockpicker-canvas">
-                <svg class="clockpicker-svg" width="200" height="200">
-                    <g transform="translate(100,100)">
-                        <circle class="clockpicker-canvas-bg clockpicker-canvas-bg-trans" r="13" cx="40.00000000000003"
-                                cy="69.28203230275508"></circle>
-                        <circle class="clockpicker-canvas-fg" r="3.5" cx="40.00000000000003"
-                                cy="69.28203230275508"></circle>
-                        <line x1="0" y1="0" x2="40.00000000000003" y2="69.28203230275508"></line>
-                        <circle class="clockpicker-canvas-bearing" cx="0" cy="0" r="2"></circle>
-                    </g>
-                </svg>
-            </div>
-            <div class="clockpicker-dial clockpicker-hours clockpicker-dial-out" style="visibility: hidden;">
-                <div class="clockpicker-tick" style="left: 87px; top: 7px;">00</div>
-                <div class="clockpicker-tick" style="left: 114px; top: 40.2346px; font-size: 120%;">1</div>
-                <div class="clockpicker-tick" style="left: 133.765px; top: 60px; font-size: 120%;">2</div>
-                <div class="clockpicker-tick" style="left: 141px; top: 87px; font-size: 120%;">3</div>
-                <div class="clockpicker-tick" style="left: 133.765px; top: 114px; font-size: 120%;">4</div>
-                <div class="clockpicker-tick" style="left: 114px; top: 133.765px; font-size: 120%;">5</div>
-                <div class="clockpicker-tick" style="left: 87px; top: 141px; font-size: 120%;">6</div>
-                <div class="clockpicker-tick" style="left: 60px; top: 133.765px; font-size: 120%;">7</div>
-                <div class="clockpicker-tick" style="left: 40.2346px; top: 114px; font-size: 120%;">8</div>
-                <div class="clockpicker-tick" style="left: 33px; top: 87px; font-size: 120%;">9</div>
-                <div class="clockpicker-tick" style="left: 40.2346px; top: 60px; font-size: 120%;">10</div>
-                <div class="clockpicker-tick" style="left: 60px; top: 40.2346px; font-size: 120%;">11</div>
-                <div class="clockpicker-tick" style="left: 87px; top: 33px; font-size: 120%;">12</div>
-                <div class="clockpicker-tick" style="left: 127px; top: 17.718px;">13</div>
-                <div class="clockpicker-tick" style="left: 156.282px; top: 47px;">14</div>
-                <div class="clockpicker-tick" style="left: 167px; top: 87px;">15</div>
-                <div class="clockpicker-tick" style="left: 156.282px; top: 127px;">16</div>
-                <div class="clockpicker-tick" style="left: 127px; top: 156.282px;">17</div>
-                <div class="clockpicker-tick" style="left: 87px; top: 167px;">18</div>
-                <div class="clockpicker-tick" style="left: 47px; top: 156.282px;">19</div>
-                <div class="clockpicker-tick" style="left: 17.718px; top: 127px;">20</div>
-                <div class="clockpicker-tick" style="left: 7px; top: 87px;">21</div>
-                <div class="clockpicker-tick" style="left: 17.718px; top: 47px;">22</div>
-                <div class="clockpicker-tick" style="left: 47px; top: 17.718px;">23</div>
-            </div>
-            <div class="clockpicker-dial clockpicker-minutes clockpicker-dial-out" style="visibility: visible;">
-                <div class="clockpicker-tick" style="left: 87px; top: 7px; font-size: 120%;">00</div>
-                <div class="clockpicker-tick" style="left: 127px; top: 17.718px; font-size: 120%;">05</div>
-                <div class="clockpicker-tick" style="left: 156.282px; top: 47px; font-size: 120%;">10</div>
-                <div class="clockpicker-tick" style="left: 167px; top: 87px; font-size: 120%;">15</div>
-                <div class="clockpicker-tick" style="left: 156.282px; top: 127px; font-size: 120%;">20</div>
-                <div class="clockpicker-tick" style="left: 127px; top: 156.282px; font-size: 120%;">25</div>
-                <div class="clockpicker-tick" style="left: 87px; top: 167px; font-size: 120%;">30</div>
-                <div class="clockpicker-tick" style="left: 47px; top: 156.282px; font-size: 120%;">35</div>
-                <div class="clockpicker-tick" style="left: 17.718px; top: 127px; font-size: 120%;">40</div>
-                <div class="clockpicker-tick" style="left: 7px; top: 87px; font-size: 120%;">45</div>
-                <div class="clockpicker-tick" style="left: 17.718px; top: 47px; font-size: 120%;">50</div>
-                <div class="clockpicker-tick" style="left: 47px; top: 17.718px; font-size: 120%;">55</div>
-            </div>
-        </div>
-        <span class="clockpicker-am-pm-block"></span></div>
-</div>
+
 <script>
     let dtp = null;
     let indexg = null
@@ -616,7 +637,7 @@
                         "title": "عنوان",
                         "label": "زیر متن.",
                         "required": false,
-                        'code': ' <div class="componentholder"><div class="settingmenu d-none"><p class="m-0 ms-4 settingicon" data-bs-toggle="modal" data-bs-target="#editinputmodal"> <img src="icons/setting.svg" class="w-75" alt=""> </p><p class="m-0 ms-4 deleteicon" data-bs-toggle="modal" data-bs-target="#deletemodal"><img src="icons/delete.svg" class="w-75" alt=""></p></div><div class="componentfield"><h4 class=""></h4><div class = "input-group mb-3" ><span class = "input-group-text bg-white" id = "basic-addon1" > <i class = "fa-solid fa-clock" > </i></span ><input id="start_time" name="start_time" type="text" class="form-control py-2 clockpicker" ></div> <small></small ></div></div>'
+                        'code': ' <div class="componentholder"><div class="settingmenu d-none"><p class="m-0 ms-4 settingicon" data-bs-toggle="modal" data-bs-target="#editinputmodal"> <img src="icons/setting.svg" class="w-75" alt=""> </p><p class="m-0 ms-4 deleteicon" data-bs-toggle="modal" data-bs-target="#deletemodal"><img src="icons/delete.svg" class="w-75" alt=""></p></div><div class="componentfield"><h4 class=""></h4><div class = "input-group mb-3 clockpicker" ><span class = "input-group-text bg-white" id = "basic-addon1" > <i class = "fa-solid fa-clock" > </i></span ><input id="start_time" name="start_time" type="text" class="form-control py-3 " ></div> <small></small ></div></div>'
                     },
                     {
                         'name': 'تاریخ',
@@ -688,6 +709,7 @@
         },
         methods: {
             addnewcomponent(number) {
+                this.formtitle()
                 console.log(number)
                 let col = 12
                 if (number === 2) {
@@ -713,7 +735,7 @@
                 }
             },
             createcomponent(value) {
-
+                this.formtitle()
 
                 let formholder = document.getElementById('component' + this.componentindex)
                 formholder.removeAttribute('data-bs-toggle')
@@ -726,7 +748,7 @@
                         "name": value.type,
                         "title": value.title
                     }
-                    this.outputdata[this.componentindex] = this.components[this.componentindex]
+                    this.outputdata[this.componentindex + 1] = this.components[this.componentindex]
 
                 }
                 if (value.type === 'check' || value.type === 'radio') {
@@ -738,7 +760,7 @@
                         "two_columns": value.two_columns,
                         "required": value.required
                     }
-                    this.outputdata[this.componentindex] = this.components[this.componentindex]
+                    this.outputdata[this.componentindex + 1] = this.components[this.componentindex]
                     let component = formholder.getElementsByClassName('componentfield');
                     component[0].getElementsByTagName('h4')[0].innerHTML = this.components[this.componentindex].title
 
@@ -754,7 +776,7 @@
                         'required': value.required,
 
                     }
-                    this.outputdata[this.componentindex] = this.components[this.componentindex]
+                    this.outputdata[this.componentindex + 1] = this.components[this.componentindex]
                     let component = formholder.getElementsByClassName('componentfield');
                     component[0].getElementsByTagName('h4')[0].innerHTML = this.components[this.componentindex].title
                     if (value.type === 'date') {
@@ -791,7 +813,7 @@
                         "name": value.type,
 
                     }
-                    this.outputdata[this.componentindex] = this.components[this.componentindex]
+                    this.outputdata[this.componentindex + 1] = this.components[this.componentindex]
 
                 }
                 if (value.type === 'select') {
@@ -805,7 +827,7 @@
                         "required": value.required
 
                     }
-                    this.outputdata[this.componentindex] = this.components[this.componentindex]
+                    this.outputdata[this.componentindex + 1] = this.components[this.componentindex]
                     let component = formholder.getElementsByClassName('componentfield');
                     component[0].getElementsByTagName('h4')[0].innerHTML = this.components[this.componentindex].title
                     component[0].getElementsByTagName('small')[0].innerHTML = this.components[this.componentindex].label
@@ -822,7 +844,7 @@
                         'type': value.inputType,
                         'required': value.required,
                     }
-                    this.outputdata[this.componentindex] = this.components[this.componentindex]
+                    this.outputdata[this.componentindex + 1] = this.components[this.componentindex]
                     let component = formholder.getElementsByClassName('componentfield');
                     component[0].getElementsByTagName('h4')[0].innerHTML = this.components[this.componentindex].title
                     component[0].getElementsByTagName('input')[0].setAttribute('placeholder', this.components[this.componentindex].placeholder)
@@ -837,7 +859,7 @@
                         "rows": [],
                         "required": value.required
                     }
-                    this.outputdata[this.componentindex] = this.components[this.componentindex]
+                    this.outputdata[this.componentindex + 1] = this.components[this.componentindex]
 
                 }
                 if (value.type === 'file') {
@@ -851,7 +873,7 @@
                         'formats': value.formats,
                         'required': value.required,
                     }
-                    this.outputdata[this.componentindex] = this.components[this.componentindex]
+                    this.outputdata[this.componentindex + 1] = this.components[this.componentindex]
                     let component = formholder.getElementsByClassName('componentfield');
                     component[0].getElementsByTagName('h4')[0].innerHTML = this.components[this.componentindex].title
                     component[0].getElementsByTagName('input')[0].setAttribute('placeholder', this.components[this.componentindex].placeholder)
@@ -867,7 +889,7 @@
                         'label': value.label,
                         'required': value.required,
                     }
-                    this.outputdata[this.componentindex] = this.components[this.componentindex]
+                    this.outputdata[this.componentindex + 1] = this.components[this.componentindex]
                     let component = formholder.getElementsByClassName('componentfield');
                     component[0].getElementsByTagName('h4')[0].innerHTML = this.components[this.componentindex].title
                     component[0].getElementsByTagName('textarea')[0].setAttribute('placeholder', this.components[this.componentindex].placeholder)
@@ -1078,8 +1100,7 @@
                             if (file.name.endsWith(item)) {
                                 bool = true
                                 break;
-                            }
-                            else {
+                            } else {
                                 bool = false
 
                             }
@@ -1093,8 +1114,7 @@
                                 this.error = "فایل با موفقیت آپلود شد"
                                 errormsg.innerHTML = this.error
                             }
-                        }
-                        else {
+                        } else {
                             uploadinput.value = ''
                             this.error = 'فایل مجاز نیست'
                             errormsg.innerHTML = this.error
@@ -1151,7 +1171,7 @@
 
 
                 $('.clockpicker').clockpicker({
-                    placement: 'left',
+                    placement: 'bottom',
                     align: 'left',
                     donetext: 'انتخاب',
                     autoclose: true,
@@ -1196,6 +1216,16 @@
                 component.setAttribute('data-bs-toggle', 'modal')
                 component.setAttribute('data-bs-target', '#addcomponentmodal')
                 component.innerHTML = '<div class="d-flex justify-content-center nullfield form-control my-5"> <h3 class="addplus">+</h3> </div>'
+
+
+            },
+            formtitle() {
+                let formtitle = document.getElementById('formtitle')
+                this.outputdata[0] = {
+                    "col": "12",
+                    "name": "header",
+                    "title": formtitle.value
+                }
 
 
             },
