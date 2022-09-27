@@ -338,7 +338,7 @@
 
                 </div>
 
-                <button class="btn addnewbtn1" @click="addoption">+</button>
+                <button class="btn addnewbtn2" @click="addoption">+</button>
                 <input type="text" class="form-control my-4 py-2" v-model="editcomponent.label">
                 <hr>
                 <h5>انتخاب گزینه پیش فرض</h5>
@@ -389,7 +389,7 @@
                 </div>
 
 
-                <button class="btn addnewbtn1" @click="addcheck">+</button>
+                <button class="btn addnewbtn2" @click="addcheck">+</button>
 
                 <hr>
                 <div class="d-flex">
@@ -453,7 +453,7 @@
                 </div>
 
 
-                <button class="btn addnewbtn1 my-3" @click="addcolumn">+</button>
+                <button class="btn addnewbtn2 my-3" @click="addcolumn">+</button>
 
                 <hr>
                 <div class="mb-1 position-relative col-12"
@@ -463,7 +463,7 @@
                     <i class="fa-solid fa-xmark removemark2" @click="removerow(index)"></i>
 
                 </div>
-                <button class="btn addnewbtn1 my-3" @click="addrow">+</button>
+                <button class="btn addnewbtn2 my-3" @click="addrow">+</button>
                 <hr>
                 <div class="d-flex my-3">
                     <input type="checkbox" v-model="editcomponent.required">
@@ -974,7 +974,7 @@
                     }
                     if (component.name === 'table') {
 
-                        let coulmns = ''
+                        let coulmns = '<th>        </th>   '
                         let rows = ''
 
                         component = this.editcomponent

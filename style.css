@@ -35,6 +35,21 @@ ul {
     border: 1px solid #1BC5BD;
 }
 
+.addnewbtn2 {
+    background: #1BC5BD;
+    color: white;
+    width: 15%;
+    border: 1px solid #1BC5BD;
+
+}
+
+.addnewbtn2:hover {
+    background: #1BC5BD;
+    color: white;
+
+    border: 1px solid #1BC5BD;
+}
+
 .addnewbtn:hover {
     color: #1BC5BD;
 
