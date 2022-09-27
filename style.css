@@ -19,7 +19,16 @@ ul {
     width: 20%;
     border: 1px solid #1BC5BD;
 }
+.addnewbtn4 {
+    color: #1BC5BD;
+    width: 15%;
+    border: 1px solid #1BC5BD;
+}
+.addnewbtn4:hover {
+    color: #1BC5BD;
 
+    border: 1px solid #1BC5BD;
+}
 .addnewbtn1 {
     background: #1BC5BD;
     color: white;
@@ -154,4 +163,18 @@ ul {
 
 .removemark3:hover {
     cursor: pointer;
+}
+.addfielddiv img{
+    border: 1px solid #f3f6f9;
+
+}
+.addfielddiv:hover img{
+    cursor: pointer;
+    border: 2px solid #1BC5BD;
+    border-radius: 5px;
+}
+.addfielddiv:hover h4{
+    cursor: pointer;
+    color: #1BC5BD;
+
 }

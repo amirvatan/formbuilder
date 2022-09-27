@@ -121,11 +121,16 @@
 
         </div>
 
-
-        <button class="addnewbtn btn m-auto mb-5 mt-5" data-bs-toggle="modal" data-bs-target="#addnewfieldmodal">افزودن
-            مورد
-            جدید
-        </button>
+        <div class="m-auto text-center">
+            <button class="addnewbtn1 btn  mb-5 mt-5 ms-4" data-bs-toggle="modal" data-bs-target="#addnewfieldmodal">
+                افزودن
+                مورد
+                جدید
+            </button>
+            <button v-if="components.length > 0" class="addnewbtn4 btn mb-5 mt-5 ms-4" @click="deleterow">
+                حذف سطر
+            </button>
+        </div>
 
 
     </div>
@@ -141,13 +146,30 @@
     <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
 
-            <div class="modal-body d-flex justify-content-center ">
-                <button class="btn addnewbtn ms-3" @click="addnewcomponent(1)" data-bs-dismiss="modal">یک فیلد</button>
-                <button class="btn addnewbtn ms-3" @click="addnewcomponent(2)" data-bs-dismiss="modal">دو فیلد</button>
-            </div>
+            <div class="modal-body d-flex justify-content-center w-100">
+                <div class="d-block w-100 text-center m-0 p-0">
+                    <div class="addfielddiv m-0 p-0" @click="addnewcomponent(1)" data-bs-dismiss="modal"><img
+                            src="icons/Group%209.svg" class="w-75"
+                            alt="">
+                        <h4>یک ستون</h4></div>
 
+                </div>
+
+                <div class="d-block w-100 text-center m-0 p-0">
+                    <div class="addfielddiv m-0 p-0" @click="addnewcomponent(2)" data-bs-dismiss="modal"><img
+                            src="icons/Group%2010.svg" class="w-75"
+                            alt=""></button>
+                        <h4>دو ستون</h4>
+                    </div>
+
+                </div>
+
+            </div>
         </div>
     </div>
+
+
+
 </div>
 <div class="modal fade" id="addcomponentmodal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered">
@@ -382,8 +404,10 @@
                                :id="'optionvalue' + index" :placeholder="'انتخاب' +' ' +(index + 1)"
                                v-model="option.title"
                         >
-                        <i class="fa-solid fa-xmark removemark1" v-if="twocol === 6" @click="removeoption(index)"></i>
-                        <i class="fa-solid fa-xmark removemark2" v-if="twocol === 12" @click="removeoption(index)"></i>
+                        <i class="fa-solid fa-xmark removemark1" v-if="twocol === 6"
+                           @click="removeoption(index)"></i>
+                        <i class="fa-solid fa-xmark removemark2" v-if="twocol === 12"
+                           @click="removeoption(index)"></i>
 
                     </div>
                 </div>
@@ -485,23 +509,23 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">
-                    آیا از حذف این آیتم مطمِین هستید؟
+                    حذف
                 </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+
+            </div>
+            <div class="modal-body">
+                <h5>آیا از حذف اطمینان هستید؟</h5>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn addnewbtn1" @click="deletecomponent(componentindex)"
+                <button type="button" class="btn addnewbtn4" data-bs-dismiss="modal">انصراف</button>
+                <button type="button" class="btn addnewbtn2" @click="deletecomponent(componentindex)"
                         data-bs-dismiss="modal">تایید
                 </button>
-                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">لغو</button>
+
             </div>
         </div>
     </div>
 </div>
-
-
-</div>
-
 
 <script src="clock%20and%20date%20picker/jquery-3.6.0.min.js"></script>
 <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -514,7 +538,7 @@
 </script>
 
 <script>
-    let dtp = null;
+    let numberofcomponents = null;
     let indexg = null
     let app = Vue.createApp({
         delimiters: ['[[', ']]'],
@@ -711,6 +735,7 @@
             addnewcomponent(number) {
                 this.formtitle()
                 console.log(number)
+                numberofcomponents = number
                 let col = 12
                 if (number === 2) {
                     col = 6;
@@ -1211,7 +1236,7 @@
                 this.components[index] = {
                     'col': this.components[index].col
                 }
-                this.outputdata.splice(index, 1)
+                this.outputdata.splice((index + 1), 1)
 
                 component.setAttribute('data-bs-toggle', 'modal')
                 component.setAttribute('data-bs-target', '#addcomponentmodal')
@@ -1226,6 +1251,26 @@
                     "name": "header",
                     "title": formtitle.value
                 }
+
+
+            },
+            deleterow() {
+                console.log("delete")
+
+                let no = this.components.length - 1
+
+                if(this.components[no].col === 12){
+                    numberofcomponents = 1
+                }
+                else{
+                    numberofcomponents = 2
+                }
+                for (let i = 0; i < numberofcomponents; i++) {
+                    this.components.splice((this.components.length - 1), 1)
+                    this.outputdata.splice((this.components.length + 1), 1)
+
+                }
+                console.log(this.components)
 
 
             },
