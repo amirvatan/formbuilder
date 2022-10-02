@@ -14,26 +14,41 @@ ul {
     list-style: none;
 }
 
+span {
+    width: 29px !important;
+}
+
 .addnewbtn {
+    border-radius: 5px;
     color: #1BC5BD;
     width: 20%;
+    background: white;
+    padding: 5px 0px;
     border: 1px solid #1BC5BD;
 }
+
 .addnewbtn4 {
     color: #1BC5BD;
     width: 15%;
+    background: white;
+    padding: 5px 0px;
+    border-radius: 5px;
     border: 1px solid #1BC5BD;
 }
+
 .addnewbtn4:hover {
     color: #1BC5BD;
 
     border: 1px solid #1BC5BD;
 }
+
 .addnewbtn1 {
     background: #1BC5BD;
     color: white;
     width: 15%;
     border: 1px solid #1BC5BD;
+    border-radius: 5px;
+    padding: 5px 0px;
     margin-right: 360px;
 }
 
@@ -48,6 +63,8 @@ ul {
     background: #1BC5BD;
     color: white;
     width: 15%;
+    border-radius: 5px;
+    padding: 5px 0px;
     border: 1px solid #1BC5BD;
 
 }
@@ -66,10 +83,16 @@ ul {
 }
 
 .nullfield {
-    background: #f1f1f1;
-    margin-top: 39px !important;
+    background: #ffffff;
 }
 
+.componentholder1 {
+    width: 548px;
+    height: 70px;
+}
+.spans:hover{
+    cursor: pointer;
+}
 .nullfield:hover {
 
     cursor: pointer;
@@ -86,14 +109,25 @@ ul {
 
 .componentitem {
     background: #f3f6f9;
-    border-radius: 5px;
+    border-radius: 2px;
+}
+.deleteicon{
+    margin-left: 15px;
+    margin-bottom: 0;
 }
 
+.settingicon{
+    margin-left: 5px;
+    margin-bottom: 0;
+}
 .deleteicon:hover {
+
     cursor: pointer;
+
 }
 
 .settingicon:hover {
+
     cursor: pointer;
 }
 
@@ -104,19 +138,26 @@ ul {
     background: white;
 }
 
+.componentholder .settingmenu {
+    margin-bottom: 5px;
+    display: flex;
+    opacity: 0;
+}
+
 .componentholder:hover .settingmenu {
-    display: flex !important;
+
+    opacity: 100;
     justify-content: end !important;
 }
 
 .componentholder:hover .componentfield {
-    border: 1px solid black !important;
+    border: 1px solid #B2B2B2 !important;
     border-radius: 6px;
-    padding: 10px 10px;
+
 }
 
 .componentfield {
-    border: 1px solid white;
+    border: 1px solid #F7F9FB;
     border-radius: 6px;
     padding: 10px 10px;
 }
@@ -164,17 +205,40 @@ ul {
 .removemark3:hover {
     cursor: pointer;
 }
-.addfielddiv img{
+
+.addfielddiv img {
     border: 1px solid #f3f6f9;
 
 }
-.addfielddiv:hover img{
+
+.addfielddiv:hover img {
     cursor: pointer;
     border: 2px solid #1BC5BD;
     border-radius: 5px;
 }
-.addfielddiv:hover h4{
+
+.addfielddiv:hover h4 {
     cursor: pointer;
     color: #1BC5BD;
 
+}
+
+.componentsrows {
+    background: #F7F9FB;
+    height: fit-content!important;
+    border-radius: 5px;
+}
+
+.dragbtn:hover {
+    cursor: pointer;
+}
+
+.dragbtncolor {
+    color: #656565 !important;
+
+}
+
+.componentrow:hover .spans{
+
+    opacity: 100 !important;
 }
