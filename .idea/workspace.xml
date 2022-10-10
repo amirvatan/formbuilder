@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="30de52cf-ff3c-4797-92cc-6202eb36e332" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/icons/Group 12.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/icons/Vector.svg" afterDir="false" />
+    <list default="true" id="30de52cf-ff3c-4797-92cc-6202eb36e332" name="Changes" comment="update 1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,7 +85,17 @@
       <workItem from="1664892689094" duration="14179000" />
       <workItem from="1664952447669" duration="10148000" />
       <workItem from="1665217916655" duration="7271000" />
+      <workItem from="1665389494604" duration="470000" />
+      <workItem from="1665389983070" duration="1690000" />
     </task>
+    <task id="LOCAL-00001" summary="update 1">
+      <created>1665389577177</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1665389577177</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -128,5 +134,9 @@
         </entry>
       </map>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="update 1" />
+    <option name="LAST_COMMIT_MESSAGE" value="update 1" />
   </component>
 </project>
