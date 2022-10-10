@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="30de52cf-ff3c-4797-92cc-6202eb36e332" name="Changes" comment="" />
+    <list default="true" id="30de52cf-ff3c-4797-92cc-6202eb36e332" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/icons/Group 12.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/icons/Vector.svg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,6 +20,9 @@
         <option value="CSS File" />
       </list>
     </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -30,15 +39,15 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Programming/Pycharm/BootStrap/formbulderfrontend/VueJs&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Programming/Pycharm/BootStrap/formbulderfrontend/icons&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
-      <recent name="D:\Programming\Pycharm\BootStrap\formbulderfrontend\VueJs" />
       <recent name="D:\Programming\Pycharm\BootStrap\formbulderfrontend\icons" />
+      <recent name="D:\Programming\Pycharm\BootStrap\formbulderfrontend\VueJs" />
       <recent name="D:\Programming\Pycharm\BootStrap\formbulderfrontend" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
@@ -70,11 +79,54 @@
       <workItem from="1664566839793" duration="2891000" />
       <workItem from="1664600869740" duration="30463000" />
       <workItem from="1664652969365" duration="4358000" />
-      <workItem from="1664692386208" duration="2905000" />
+      <workItem from="1664692386208" duration="4750000" />
+      <workItem from="1664729851565" duration="2545000" />
+      <workItem from="1664772651886" duration="333000" />
+      <workItem from="1664773000148" duration="8317000" />
+      <workItem from="1664795504746" duration="7380000" />
+      <workItem from="1664813900854" duration="7836000" />
+      <workItem from="1664886370542" duration="4291000" />
+      <workItem from="1664892689094" duration="14179000" />
+      <workItem from="1664952447669" duration="10148000" />
+      <workItem from="1665217916655" duration="7271000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ID_ORDER">
+      <list>
+        <option value="Default.Root" />
+        <option value="Default.Author" />
+        <option value="Default.Date" />
+        <option value="Default.Subject" />
+        <option value="Space.CommitStatus" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="origin/master" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
 </project>

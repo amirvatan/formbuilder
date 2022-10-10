@@ -62,8 +62,9 @@ span {
 .addnewbtn2 {
     background: #1BC5BD;
     color: white;
-    width: 15%;
-    border-radius: 5px;
+    width: 10%;
+    height: 10%;
+    border-radius: 3px;
     padding: 5px 0px;
     border: 1px solid #1BC5BD;
 
@@ -87,12 +88,73 @@ span {
 }
 
 .componentholder1 {
-    width: 548px;
-    height: 70px;
+    width: 200px;
+    height: 62px;
 }
-.spans:hover{
+
+.spans img {
+    width: 35%;
+}
+
+@media screen and (max-width: 650px) {
+    .spans {
+        opacity: 100% !important;
+
+
+    }
+    .moverowicon img {
+        margin-left: 20px;
+        width: 90%;
+    }
+
+    .deleterowicon img {
+        width: 90%;
+        margin-right: 20px;
+    }
+
+
+}
+
+@media screen and (max-width: 800px) {
+    .componentholder1 {
+        width: 0;
+        height: 10px;
+    }
+    .componentholder .settingmenu {
+
+        opacity: 100 !important;
+        justify-content: end !important;
+    }
+
+    .addbtn {
+        width: 95px;
+    }
+
+    .spans {
+        opacity: 100% !important;
+
+
+    }
+
+
+    .moverowicon img {
+
+        margin-left: 20px;
+        width: 60%;
+    }
+
+    .deleterowicon img {
+        width: 60%;
+        margin-right: 20px;
+    }
+
+
+}
+
+.spans:hover {
     cursor: pointer;
 }
+
 .nullfield:hover {
 
     cursor: pointer;
@@ -100,26 +162,26 @@ span {
     border-color: #1BC5BD;
 }
 
-.nullfield:hover .addplus {
-
-    color: #1BC5BD;
-!important;
-
-}
 
 .componentitem {
     background: #f3f6f9;
     border-radius: 2px;
 }
-.deleteicon{
+
+.deleteicon {
+    width: 24px !important;
+
     margin-left: 15px;
     margin-bottom: 0;
 }
 
-.settingicon{
+.settingicon {
+    width: 24px !important;
+
     margin-left: 5px;
     margin-bottom: 0;
 }
+
 .deleteicon:hover {
 
     cursor: pointer;
@@ -225,7 +287,7 @@ span {
 
 .componentsrows {
     background: #F7F9FB;
-    height: fit-content!important;
+    height: fit-content !important;
     border-radius: 5px;
 }
 
@@ -238,7 +300,12 @@ span {
 
 }
 
-.componentrow:hover .spans{
+.componentrow:hover .spans {
 
     opacity: 100 !important;
+}
+
+.bgdetect .componentsrows {
+    border: 1px solid #1BC5BD;
+
 }
