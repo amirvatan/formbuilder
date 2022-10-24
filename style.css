@@ -3,7 +3,7 @@ body {
 }
 
 hr {
-    background-color: #eee;
+    background-color: #ccc7c7;
     border: 0 none;
     color: #eee;
     height: 4px;
@@ -308,4 +308,7 @@ span {
 .bgdetect .componentsrows {
     border: 1px solid #1BC5BD;
 
+}
+td input{
+    width: 90%;
 }

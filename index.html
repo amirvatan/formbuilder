@@ -537,26 +537,26 @@
             <div class="modal-body">
                 <div class="px-5 pb-2 row">
 
-                    <h6 class="col-6">عنوان ستون</h6>
-                    <h6 class="col-6">نوع ستون</h6>
+                    <h6 class="col-6">عنوان سطر</h6>
+                    <h6 class="col-6">نوع سطر</h6>
 
                     <div class="mb-1 position-relative row"
-                         v-for="(option,index) in editcomponent.columns">
+                         v-for="(option,index) in editcomponent.rows">
                         <div class="col-6">
                             <input type="text" class="form-control my-2 py-2 "
                                    :id="'optionvalue' + index" :placeholder="'انتخاب' +' ' +(index + 1)"
                                    v-model="option.title"
                             >
-                            <i class="fa-solid fa-xmark removemark3" @click="removecolumn(index)"></i>
+                            <i class="fa-solid fa-xmark removemark3" @click="removerow(index)"></i>
                         </div>
 
                         <div class="col-6">
                             <select class="form-select col-6 my-2" aria-label="Default select example"
                                     v-model="option.type">
+                                <option value="text" selected>متن</option>
                                 <option value="email">ایمیل</option>
-                                <option value="text">متن</option>
-
-                                <option value="checkbox">چک باکس</option>
+                                <option value="checkbox">انتخاب چندتایی</option>
+                                <option value="radio">انتخاب تکی</option>
                                 <option value="number">عدد</option>
                                 <option value="tel">شماره</option>
                             </select>
@@ -565,7 +565,7 @@
 
 
                     </div>
-                    <button class="btn addnewbtn2 my-3" @click="addcolumn">+</button>
+                    <button class="btn addnewbtn2 my-3" @click="addrow">+</button>
                 </div>
 
 
@@ -573,13 +573,13 @@
                 <div class="px-5 pb-2 row">
 
                     <div class="mb-1 position-relative col-12"
-                         v-for="(option,index) in editcomponent.rows">
+                         v-for="(option,index) in editcomponent.columns">
 
                         <input type="text" class="form-control my-2 py-2" v-model="option.title">
-                        <i class="fa-solid fa-xmark removemark2" @click="removerow(index)"></i>
+                        <i class="fa-solid fa-xmark removemark2" @click="removecolumn(index)"></i>
 
                     </div>
-                    <button class="btn addnewbtn2 my-3" @click="addrow">+</button>
+                    <button class="btn addnewbtn2 my-3" @click="addcolumn">+</button>
                 </div>
 
                 <hr>
@@ -755,13 +755,13 @@
                         'name': 'جدا کننده',
                         'icon': '<img src="icons/جداکننده.svg" class="w-75">',
                         'type': "splitter",
-                        'code': '<hr>'
+                        'code': '<div class="componentholder"> <div class="settingmenu">     <p class="deleteicon" data-bs-toggle="modal" data-bs-target="#deletemodal"><img src="icons/delete.svg" class="w-75" alt=""></p></div><hr class="mt-5">'
                     },
                     {
                         'name': 'فضای خالی',
                         'icon': '<img src="icons/فضای%20خالی.svg" class="w-75">',
                         'type': 'space',
-                        'code': '<div class="m-5 p-5"></div>'
+                        'code': '<div class="componentholder"> <div class="settingmenu">     <p class="deleteicon" data-bs-toggle="modal" data-bs-target="#deletemodal"><img src="icons/delete.svg" class="w-75" alt=""></p></div><div class="m-5 p-5"></div>'
                     },
                     {
                         'name': 'زمان',
@@ -1157,12 +1157,12 @@
 
                             coulmns += optiontag
                         }
-                        for (let item of component.rows) {
+                        for (let item in component.rows) {
                             let colomnsvalue = ''
                             for (let col in component.columns) {
-                                colomnsvalue += `<td><input type="${component.columns[col].type}"></td>`
+                                colomnsvalue += `<td><input type="${component.rows[item].type}"></td>`
                             }
-                            optiontag = `<tr> <th scope="row">${item.title}</th>` + colomnsvalue + `</tr>`
+                            optiontag = `<tr> <th scope="row">${component.rows[item].title}</th>` + colomnsvalue + `</tr>`
 
                             rows += optiontag
                         }
@@ -1411,7 +1411,7 @@
 
 
                 }
-                if(this.components[index].col === 12){
+                if (this.components[index].col === 12) {
                     component.innerHTML = '<div class="d-flex justify-content-center nullfield form-control"> <h5 class="addplus">+</h5> </div>'
                 }
 
@@ -1523,14 +1523,14 @@
                 swapClass: 'bgdetect',
                 handle: '.dragbtn',
 
-               /*   onChoose: function (evt) {
-                      let formholder = document.getElementById('formholder')
-                      let divs = formholder.getElementsByClassName('componentrow')
-                      for (let i = 0; i < divs.length; i++) {
-                          divs[i].style.order = i
-                      }
+                /*   onChoose: function (evt) {
+                       let formholder = document.getElementById('formholder')
+                       let divs = formholder.getElementsByClassName('componentrow')
+                       for (let i = 0; i < divs.length; i++) {
+                           divs[i].style.order = i
+                       }
 
-                  },*/
+                   },*/
                 onEnd: function (evt) {
                     let formholder = document.getElementById('formholder')
                     let divs = formholder.getElementsByClassName('componentrow')

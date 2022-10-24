@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="30de52cf-ff3c-4797-92cc-6202eb36e332" name="Changes" comment="update 1">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +37,7 @@
     &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;WebServerToolWindowFactoryState&quot;: &quot;false&quot;,
-    &quot;last_opened_file_path&quot;: &quot;D:/Programming/Pycharm/BootStrap/formbulderfrontend/icons&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/Programming/Pycharm/BootStrap/formbulderfrontend&quot;,
     &quot;list.type.of.created.stylesheet&quot;: &quot;CSS&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
@@ -86,7 +88,12 @@
       <workItem from="1664952447669" duration="10148000" />
       <workItem from="1665217916655" duration="7271000" />
       <workItem from="1665389494604" duration="470000" />
-      <workItem from="1665389983070" duration="1690000" />
+      <workItem from="1665389983070" duration="1912000" />
+      <workItem from="1665821540550" duration="4240000" />
+      <workItem from="1666283523390" duration="4693000" />
+      <workItem from="1666431964993" duration="2175000" />
+      <workItem from="1666586162990" duration="643000" />
+      <workItem from="1666633276844" duration="1362000" />
     </task>
     <task id="LOCAL-00001" summary="update 1">
       <created>1665389577177</created>
